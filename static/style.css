@@ -1,0 +1,141 @@
+/* Cấu hình cho chatbox */
+.chatbox__container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+/* Header của chatbox */
+.chatbox__header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.chatbox__image--header img {
+    border-radius: 50%;
+}
+
+.chatbox__content--header {
+    margin-left: 10px;
+}
+
+.chatbox__heading--header {
+    margin: 0;
+}
+
+.chatbox__description--header {
+    margin: 0;
+}
+
+/* Phần hiển thị tin nhắn */
+.chatbox__messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Đảm bảo tin nhắn mới nằm ở dưới cùng */
+}
+
+/* Tin nhắn của người dùng và bot */
+.messages__item {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 10px;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative; /* Để có thể đặt biểu tượng ở bên cạnh */
+    box-sizing: border-box; /* Đảm bảo padding và border tính vào kích thước */
+}
+
+/* Tin nhắn của người dùng */
+.messages__item--user {
+    background: #e1f5fe;
+    align-self: flex-end;
+    text-align: right;
+    border-radius: 10px 10px 0 10px; /* Bo góc trên bên phải */
+    display: flex;
+    flex-direction: row-reverse; /* Biểu tượng ở bên phải tin nhắn */
+    padding-left: 10px; /* Khoảng cách giữa tin nhắn và biểu tượng */
+}
+
+/* Tin nhắn của bot */
+.messages__item--bot {
+    background: #f1f0f0;
+    align-self: flex-start;
+    text-align: left;
+    border-radius: 10px 10px 10px 0; /* Bo góc trên bên trái */
+    display: flex;
+    flex-direction: row; /* Biểu tượng ở bên trái tin nhắn */
+    padding-right: 10px; /* Khoảng cách giữa tin nhắn và biểu tượng */
+}
+
+/* Biểu tượng người dùng và bot */
+.messages__item--user::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url('https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png'); /* Biểu tượng người dùng */
+    background-size: cover;
+    margin-left: 10px; /* Đặt biểu tượng ở góc phải của tin nhắn */
+}
+
+.messages__item--bot::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url('https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png'); /* Biểu tượng bot, thay đổi nếu cần */
+    background-size: cover;
+    margin-right: 10px; /* Đặt biểu tượng ở góc trái của tin nhắn */
+}
+
+/* Footer của chatbox */
+.chatbox__footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #f1f1f1;
+    border-radius: 0 0 10px 10px;
+    position: absolute; /* Đặt vị trí tuyệt đối để cố định footer ở dưới cùng */
+    bottom: 0;
+    width: 100%; /* Đảm bảo footer chiếm toàn bộ chiều rộng */
+    box-sizing: border-box; /* Đảm bảo padding và border tính vào kích thước */
+}
+
+.chatbox__footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.chatbox__send--footer {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chatbox__send--footer:hover {
+    background: #0056b3;
+}
