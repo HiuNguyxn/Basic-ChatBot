@@ -32,33 +32,35 @@ for intent_data in intents['intents']:
     responses_dict[tag] = intent_data['responses']
 
 bot_name = 'Hieu'
-print("Cùng chat nào! gõ 'quit' để thoát ")
-while True:
-    sentence = input('Bạn: ')
-    if sentence.lower() == 'quit':
-        break
 
-    # Tokenize and prepare input
-    sentence_tokens = tokenize(sentence)
-    X = bag_of_word(sentence_tokens, all_words)
-    X = np.array(X).reshape(1, -1)  # Ensure X is 2D
-    X = torch.from_numpy(X).float().to(device)
 
-    # Get model output
+def get_response(msg):
+    sentence = tokenize(msg)
+    X = bag_of_word(sentence, all_words)
+    X = X.reshape(1, X.shape[0])
+    X = torch.from_numpy(X).to(device)
+
     output = model(X)
     _, predicted = torch.max(output, dim=1)
+
     tag = tags[predicted.item()]
 
-    # Calculate probabilities
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
-
     if prob.item() > 0.75:
-        # Respond based on the predicted intent
+        # Access the response using the 'tag' from the responses_dict
         if tag in responses_dict:
-            response = random.choice(responses_dict[tag])
-            print(f"{bot_name}: {response}")
-        else:
-            print(f"{bot_name}: Tôi không có phản hồi cho ý định này.")
-    else:
-        print(f"{bot_name}: Tôi không hiểu câu bạn vừa hỏi ...")
+            return random.choice(responses_dict[tag])
+
+    return "Xin lỗi tôi không hiểu ..."
+
+
+if __name__ == "__main__":
+    print("Let's chat! (type 'quit' to exit)")
+    while True:
+        sentence = input("Bạn: ")
+        if sentence == "quit":
+            break
+
+        resp = get_response(sentence)
+        print(f"{bot_name}: {resp}")

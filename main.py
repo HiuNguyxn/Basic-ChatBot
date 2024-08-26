@@ -1,13 +1,4 @@
 import numpy as np
-from vncorenlp import VnCoreNLP
-import py_vncorenlp
-from pyvi import ViTokenizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-import gensim
-from gensim.models import Word2Vec
-from transformers import AutoTokenizer, AutoModel
-
-
 # Import thư viện cần thiết
 from underthesea import word_tokenize
 
